@@ -1,14 +1,22 @@
+import * as dotenv from "dotenv";
+dotenv.config();
 import express, { Request, Response } from "express";
 import path from "path";
 import cors from "cors";
 import cookieParser from "cookie-parser";
-import { logger } from "../middleware/logger";
+import { connection } from "mongoose";
+import { logger, logEvents } from "../middleware/logger";
 import errorHandler from "../middleware/errorHandler";
 import corsOptions from "../config/corsOptions";
+import connectDB from "../config/dbConn";
 import root from "../routes/root";
 
 const app = express();
 const PORT = process.env.PORT || 5555;
+
+console.log(`Currently in ${process.env.NODE_ENV} mode`);
+
+connectDB();
 
 app.use(logger);
 
@@ -36,6 +44,17 @@ app.all("*", (req: Request, res: Response) => {
 
 app.use(errorHandler);
 
-app.listen(PORT, () => {
-  console.log(`Server running on Port ${PORT}`);
+connection.once("open", () => {
+  console.log("Connected to MongoDB");
+  app.listen(PORT, () => {
+    console.log(`Server running on Port ${PORT}`);
+  });
+});
+
+connection.on("error", (err) => {
+  console.error(err);
+  logEvents(
+    `${err.no}: ${err.code}\t${err.syscall}\t${err.hostname}`,
+    "mongoErrLog.log"
+  );
 });
