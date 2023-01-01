@@ -15,6 +15,7 @@
     "src/**/*.ts",
     "routes/**/*.ts",
     "middleware/**/*.ts",
-    "config/**/*.ts"
+    "config/**/*.ts",
+    "models/**/*.ts"
   ]
 }
