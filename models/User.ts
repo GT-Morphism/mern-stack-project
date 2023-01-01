@@ -3,7 +3,7 @@ import { Schema, model } from "mongoose";
 interface User {
   username: string;
   password: string;
-  role?: string[];
+  roles?: string[];
   active?: boolean;
 }
 
@@ -16,7 +16,7 @@ const userSchema = new Schema<User>({
     type: String,
     required: true,
   },
-  role: [
+  roles: [
     {
       type: String,
       default: "Employee",
@@ -24,7 +24,7 @@ const userSchema = new Schema<User>({
   ],
   active: {
     type: Boolean,
-    default: "active",
+    default: true,
   },
 });
 
