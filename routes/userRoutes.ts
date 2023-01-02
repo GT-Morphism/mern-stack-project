@@ -1,4 +1,4 @@
-import express, { Request, Response } from "express";
+import { Router } from "express";
 import {
   createNewUser,
   deleteUser,
@@ -6,7 +6,7 @@ import {
   updateUser,
 } from "../controllers/usersController";
 
-const userRouter = express.Router();
+const userRouter = Router();
 
 userRouter
   .route("/")
