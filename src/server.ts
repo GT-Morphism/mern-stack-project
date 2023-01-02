@@ -10,6 +10,7 @@ import errorHandler from "../middleware/errorHandler";
 import corsOptions from "../config/corsOptions";
 import connectDB from "../config/dbConn";
 import root from "../routes/root";
+import userRouter from "../routes/userRoutes";
 
 const app = express();
 const PORT = process.env.PORT || 5555;
@@ -30,6 +31,7 @@ app.use(cookieParser());
 app.use("/", express.static(path.join(__dirname, "..", "public")));
 
 app.use("/", root);
+app.use("/users", userRouter);
 
 app.all("*", (req: Request, res: Response) => {
   res.status(404);
