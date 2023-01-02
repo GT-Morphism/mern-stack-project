@@ -16,6 +16,7 @@
     "routes/**/*.ts",
     "middleware/**/*.ts",
     "config/**/*.ts",
-    "models/**/*.ts"
+    "models/**/*.ts",
+    "controllers/**/*.ts"
   ]
 }
