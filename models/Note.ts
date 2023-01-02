@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 import Inc from "mongoose-sequence";
 
 interface Note {
-  user: mongoose.Types.ObjectId;
+  userID: mongoose.Types.ObjectId;
   title: string;
   text: string;
   completed?: boolean;
@@ -10,7 +10,7 @@ interface Note {
 
 const noteSchema = new mongoose.Schema<Note>(
   {
-    user: {
+    userID: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
       ref: "User",
@@ -18,6 +18,7 @@ const noteSchema = new mongoose.Schema<Note>(
     title: {
       type: String,
       required: true,
+      lowercase: true,
     },
     text: {
       type: String,

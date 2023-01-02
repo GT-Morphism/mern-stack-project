@@ -11,6 +11,7 @@ import corsOptions from "../config/corsOptions";
 import connectDB from "../config/dbConn";
 import root from "../routes/root";
 import userRouter from "../routes/userRoutes";
+import noteRouter from "../routes/noteRoutes";
 
 const app = express();
 const PORT = process.env.PORT || 5555;
@@ -32,6 +33,7 @@ app.use("/", express.static(path.join(__dirname, "..", "public")));
 
 app.use("/", root);
 app.use("/users", userRouter);
+app.use("/notes", noteRouter);
 
 app.all("*", (req: Request, res: Response) => {
   res.status(404);
